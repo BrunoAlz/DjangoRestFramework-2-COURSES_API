@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-8 fs--2">
+        <div class="card" id="table" data-list="{&quot;valueNames&quot;:[&quot;path&quot;,&quot;views&quot;,&quot;time&quot;,&quot;exitRate&quot;],&quot;page&quot;:6,&quot;pagination&quot;:true,&quot;fallback&quot;:&quot;pages-table-fallback&quot;}">
+            <div class="card-header">
+              <div class="row flex-between-center">
+                <div class="col-auto col-sm-6 col-lg-7">
+                  <h6 class="mb-0 text-nowrap py-2 py-xl-0">Cursos</h6>
+                </div>
+                <div class="col-auto col-sm-6 col-lg-5">
+                  <div>
+                    <form>
+                      <div class="input-group">
+                        <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Busque os dados" aria-label="search">
+                        <div class="input-group-text bg-transparent">
+                          <svg class="svg-inline--fa fa-search fa-w-16 fs--1 text-600" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg><!-- <span class="fa fa-search fs--1 text-600"></span> Font Awesome fontawesome.com --></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-0 py-0">
+              <div class="table-responsive scrollbar">
+                <table class="table mb-0 overflow-hidden">
+                  <thead class="bg-200 text-900">
+                    <tr>
+                      <th class="sort pe-1 align-middle white-space-nowrap" data-sort="path">ID/th>
+                      <th class="sort pe-1 align-middle white-space-nowrap text-end" data-sort="views">Curso</th>
+                      <th class="sort pe-1 align-middle white-space-nowrap text-end" data-sort="time">Link</th>
+
+                    </tr>
+                  </thead>
+                  <tbody class="list">
+                      <tr class="btn-reveal-trigger">
+                        <td class="align-middle white-space-nowrap path">
+                                <a class="text-primary fw-semi-bold" href="#!">
+                                P003-DL-1549
+                                </a>
+                            </td>
+                        <td class="align-middle white-space-nowrap views text-end">10/12/2021</td>
+                        <td class="align-middle white-space-nowrap time text-center">
+                            <span class="badge fs--2 w-100 badge-soft-warning">Em Andamento</span>
+                        </td>
+                      
+                      </tr>
+                      <tr class="btn-reveal-trigger">
+                          <td class="align-middle white-space-nowrap path">
+                              <a class="text-primary fw-semi-bold" href="#!">
+                              P003-DL-1547
+                              </a>
+                          </td>
+                          <td class="align-middle white-space-nowrap views text-end">10/12/2020</td>
+                          <td class="align-middle white-space-nowrap time text-center">
+                              <span class="badge fs--2 w-100 badge-soft-success">Completo</span>
+                          </td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+              <div class="text-center d-none" id="pages-table-fallback">
+                <p class="fw-bold fs-1 mt-3">Não encontrado</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row align-items-center">
+                <div class="pagination d-none"><li class="active"><button class="page" type="button" data-i="1" data-page="6">1</button></li></div>
+                <div class="col">
+                  <p class="mb-0 fs--1"><span class="d-none d-sm-inline-block me-2" data-list-info="data-list-info">1 to 6 of 13</span></p>
+                </div>
+                <div class="col-auto d-flex"><button class="btn btn-sm btn-primary disabled" type="button" data-list-pagination="prev" disabled=""><span>Previous</span></button><button class="btn btn-sm btn-primary px-4 ms-2" type="button" data-list-pagination="next"><span>Next</span></button></div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+{% endblock content %}

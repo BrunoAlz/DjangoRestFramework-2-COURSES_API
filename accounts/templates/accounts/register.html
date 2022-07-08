@@ -1,0 +1,142 @@
+{% extends 'baselogin.html' %} {% load static %} {% block baselogin %} <div class="container-fluid">
+	</script>
+	<div class="row min-vh-100 bg-100">
+		<div class="col-6 d-none d-lg-block position-relative">
+			<div class="bg-holder" style="background-image:url({% static 'img/generic/19.jpg' %});"></div>
+			<!--/.bg-holder-->
+		</div>
+		<div class="col-sm-10 col-md-6 px-sm-0 align-self-center mx-auto py-5">
+			<div class="row justify-content-center g-0">
+				<div class="col-lg-9 col-xl-8 col-xxl-6">
+					<div class="card">
+						<div class="card-header bg-circle-shape bg-shape text-center p-2">
+							<a class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light" >MikeBook</a>
+						</div>
+						<div class="card-body p-4">
+							<div class="row flex-between-center">
+								<div class="col-auto">
+									<h3>Cadastrar</h3>
+								</div>
+								<div class="col-auto fs--1 text-600">
+									<span class="mb-0 fw-semi-bold">Já é usuário?</span>
+									<span>
+										<a href=" {% url 'accounts:login' %} ">Login</a>
+									</span>
+								</div>
+							</div>
+
+							<form method="POST"> 
+								{% csrf_token %}
+								<div class="row">
+
+									<div class="mb-3 col-sm-6">
+										<label class="form-label">Primeiro Nome <label class="text-danger">*</label></label>
+										{{ form.first_name }}
+									</div>									
+									{% if form.first_name.errors %}										
+										{% for error in form.first_name.errors %}
+											<ul>
+												<li>{{ error|escape }}</li>
+											</ul>
+										{% endfor %}										
+									{% endif %}
+
+									<div class="mb-3 col-sm-6">
+										<label class="form-label">Ultimo Nome <label class="text-danger">*</label></label>
+										{{ form.last_name }}
+									</div>
+									{% if form.last_name.errors %}
+										{% for error in form.last_name.errors %}
+											<ul>
+												<li>{{ error|escape }}</li>
+											</ul>
+										{% endfor %}
+									{% endif %}
+
+								</div>
+
+								<div class="mb-3">
+									<label class="form-label">Nome de Usuário <label class="text-danger">*</label></label>
+									{{ form.username }}
+								</div>
+								{% if form.username.errors %}
+									<label class="text-danger text-center">
+									{% for error in form.username.errors %}
+										<ul>
+											<li>{{ error|escape }}</li>
+										</ul>
+									{% endfor %}
+									</label>
+								{% endif %}
+
+								<div class="mb-3">
+									<label class="form-label">Email <label class="text-danger">*</label></label>
+									{{ form.email }}
+								</div>
+								{% if form.email.errors %}
+									<label class="text-danger text-center">
+										{% for error in form.email.errors %}
+											<ul>
+												<li>{{ error|escape }}</li>
+											</ul>
+										{% endfor %}
+									</label>
+								{% endif %}		
+
+								<div class="row gx-2">
+
+									<div class="mb-3 col-sm-6">
+										<label class="form-label">Senha <label class="text-danger">*</label></label>
+										{{ form.password1 }}
+									</div>
+									{% if form.password1.errors %}
+										<label class="text-danger text-center">
+											{% for error in form.password1.errors %}
+												{{ error|escape }}
+											{% endfor %}
+										</label>									
+									{% endif %}	
+
+									<div class="mb-3 col-sm-6">
+										<label class="form-label">Confirmação de senha <label class="text-danger">*</label></label>
+										{{ form.password2 }}
+									</div>
+									{% if form.password2.errors %}
+										<label class="text-danger">
+											{% for error in form.password2.errors %}
+												<ul>
+													<li>{{ error|escape }}</li>
+												</ul>
+											{% endfor %}
+										</label>
+									{% endif %}	
+
+								</div>	
+
+								<div class="form-check">
+									{{ form.checkterms }}
+									<label class="form-label">Eu aceito os <a href="#!">termos </a>e as <a href="#!">politicas de privacidade</a>
+									</label>
+									{% if form.checkterms.errors %}
+										{% for error in form.checkterms.errors %}
+											{{ error|escape }}
+										{% endfor %}
+									{% endif %}
+
+								</div>
+
+								<div class="mb-3">
+									<button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Enviar</button>
+								</div>
+							</form>
+
+
+		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> {% endblock baselogin %}

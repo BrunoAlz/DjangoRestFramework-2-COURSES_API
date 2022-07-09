@@ -14,7 +14,11 @@ urlpatterns = [
 
     # Rotas de Detalhes
     path('cursos/<int:pk>', CursoAPIView.as_view(), name='curso'),
-    path('avaliacoes/<int:pk>', AvaliacaoAPIView.as_view(), name='avaliacao'),
+    path('avaliacoes/<int:avaliacao_pk>', AvaliacaoAPIView.as_view(), name='avaliacao'),
     path('usuarios/<int:pk>', UserAPIView.as_view(), name='user'),
+
+    # Rotas de Relacionamentos
+    path('cursos/<int:curso_pk>/avaliacoes/', AvaliacoesAPIView.as_view(), name='curso_avaliacoes'),
+    path('cursos/<int:curso_pk>/avaliacoes/<int:avaliacao_pk>', AvaliacaoAPIView.as_view(), name='curso_avaliacao'),
     
 ]

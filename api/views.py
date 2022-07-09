@@ -1,10 +1,18 @@
-from rest_framework.generics import get_object_or_404
-from rest_framework import generics
-from .models import Curso, Avaliacao
 from django.contrib.auth.models import User
-from .serializers import CursoSerializer, AvaliacaoSerializer, UsersSerializer
+from rest_framework import generics
+from rest_framework.generics import get_object_or_404
+
+from rest_framework import mixins
+
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
+from .models import Avaliacao, Curso
+from .serializers import AvaliacaoSerializer, CursoSerializer, UsersSerializer
 
 
+# API V1 com GENERIC VIEWS
 class CursosAPIView(generics.ListCreateAPIView):
     """
     API de Cursos para usar no React / Flutter
@@ -82,3 +90,47 @@ class UserAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = User.objects.filter(is_active=1)
     serializer_class = UsersSerializer
+
+
+# API V2 COM VIEW SETS
+"""
+    ModelViewSet, permite a realização completa do CRUD de Um modelo, 
+    e ainda faz as rotas automaticamente.
+    Basta passar o a Consulta do modelo e o Serealizador dos dados para um Crud Simples.
+"""
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
+
+    # Usaremos o decorador ACTION para criar uma nova Rota para acessar as Avaliações dos Cursos
+    # Implementa o método para pegar dados na Requisição
+    @action(detail=True, methods=['get'])
+    def avaliacoes(self, request, pk=None):
+        # Pega o Objeto curso que está vindo na requisição
+        curso = self.get_object()
+        # Faz uma consulta usando o Objeto Cursom para pegar todas as Avaliações relacionadas, com Many
+        # a consulta "curso . 'avaliacoes'. all() está usando o RELATED NAME avaliacoes la do model"
+        serializer = AvaliacaoSerializer(curso.avaliacoes.all(), many=True)
+        # Serializa os dados e devolve na response
+        return Response(serializer.data)
+
+
+# class AvaliacoesViewSet(viewsets.ModelViewSet):
+#     queryset = Avaliacao.objects.all()
+#     serializer_class = AvaliacaoSerializer
+
+
+"""
+    Herdando Diretamente os MIXIN podemos personalizar os Métodos HTTP Permitidos
+    de forma Simples.
+"""
+class AvaliacoesViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    # mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet
+    ):
+    queryset = Avaliacao.objects.all()
+    serializer_class = AvaliacaoSerializer

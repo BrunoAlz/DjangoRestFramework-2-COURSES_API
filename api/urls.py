@@ -1,10 +1,16 @@
 from django.urls import path
 
 from .views import (
-    AvaliacoesAPIView, CursoAPIView, 
-    AvaliacaoAPIView, CursosAPIView, 
+    AvaliacoesAPIView, AvaliacoesViewSet, CursoAPIView, 
+    AvaliacaoAPIView, CursoViewSet, CursosAPIView, 
     UserAPIView, UsersAPIView
     )
+
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'avaliacoes', AvaliacoesViewSet, basename='avaliacoes')
+router.register(r'cursos', CursoViewSet, basename='cursos')
 
 urlpatterns = [
     # Rotas de Listagem

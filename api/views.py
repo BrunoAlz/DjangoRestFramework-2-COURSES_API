@@ -120,10 +120,7 @@ class CursoViewSet(viewsets.ModelViewSet):
 #     serializer_class = AvaliacaoSerializer
 
 
-"""
-    Herdando Diretamente os MIXIN podemos personalizar os Métodos HTTP Permitidos
-    de forma Simples.
-"""
+
 class AvaliacoesViewSet(
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
@@ -132,5 +129,9 @@ class AvaliacoesViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet
     ):
+    """
+        Herdando Diretamente os MIXIN podemos personalizar os Métodos HTTP Permitidos
+        de forma Simples.
+    """
     queryset = Avaliacao.objects.all()
     serializer_class = AvaliacaoSerializer

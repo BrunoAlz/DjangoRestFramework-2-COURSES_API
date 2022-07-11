@@ -106,11 +106,22 @@ class CursoViewSet(viewsets.ModelViewSet):
     # Implementa o método para pegar dados na Requisição
     @action(detail=True, methods=['get'])
     def avaliacoes(self, request, pk=None):
-        # Pega o Objeto curso que está vindo na requisição
-        curso = self.get_object()
+        # definindo a paginação para as avaliações, SOBRESCREVENDO A PAGINAÇÃO GLOBAL
+        self.pagination_class.page_size = 2
+        # definindo a consulta para a paginação
+        avaliacoes = Avaliacao.objects.filter(curso_id=pk)
+        # passando o resultado da consulta para o paginador do django
+        page = self.paginate_queryset(avaliacoes)
+
+        # se existir alguma pagina 
+        if page is not None:
+            # passa os dados paginados para o serializer
+            serializer = AvaliacaoSerializer(page, many=True)
+            # retorna os dados serializados da paginação
+            return self.get_paginated_response(serializer.data)
+
         # Faz uma consulta usando o Objeto Cursom para pegar todas as Avaliações relacionadas, com Many
-        # a consulta "curso . 'avaliacoes'. all() está usando o RELATED NAME avaliacoes la do model"
-        serializer = AvaliacaoSerializer(curso.avaliacoes.all(), many=True)
+        serializer = AvaliacaoSerializer(avaliacoes, many=True)
         # Serializa os dados e devolve na response
         return Response(serializer.data)
 

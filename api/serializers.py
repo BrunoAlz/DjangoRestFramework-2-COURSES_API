@@ -27,19 +27,19 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
 
 class CursoSerializer(serializers.ModelSerializer):
     # Adicionando Relacionamento via NESTED RELATIONSHIP
-        # MELHOR APLICADO NOS RELACIONAMENTOS ONE TO ONE
-        # avaliacoes = AvaliacaoSerializer(many=True, read_only=True)
+    # MELHOR APLICADO NOS RELACIONAMENTOS ONE TO ONE
+    avaliacoes = AvaliacaoSerializer(many=True, read_only=True)
 
     # Adicionando Relacionamento via HyperLinked Related Field
-        # MELHOR APLICADO QUANDO TEMOS MUITOS DADOS RELACIONADOS
-        # Ao invés de mostrar os dados, mostrará o Link para os dados relacionados
-        # avaliacoes = serializers.HyperlinkedRelatedField(
-        #     many=True, read_only=True, view_name='avaliacoes-detail'
-        #     )
+    # MELHOR APLICADO QUANDO TEMOS MUITOS DADOS RELACIONADOS
+    # Ao invés de mostrar os dados, mostrará o Link para os dados relacionados
+    # avaliacoes = serializers.HyperlinkedRelatedField(
+    #     many=True, read_only=True, view_name='avaliacoes-detail'
+    #     )
 
     # Adiconando Relacionamento via PK
-        # MELHOR PERFORMANCE POSSIVEL, Retorna apenas o ID, dos dados relacionados
-    avaliacoes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # MELHOR PERFORMANCE POSSIVEL, Retorna apenas o ID, dos dados relacionados
+    # avaliacoes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Curso
         fields = (

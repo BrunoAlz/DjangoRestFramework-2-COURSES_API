@@ -104,10 +104,10 @@ class CursoViewSet(viewsets.ModelViewSet):
 
     # Usaremos o decorador ACTION para criar uma nova Rota para acessar as Avaliações dos Cursos
     # Implementa o método para pegar dados na Requisição
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['get', 'post', 'put', 'delete'])
     def avaliacoes(self, request, pk=None):
         # definindo a paginação para as avaliações, SOBRESCREVENDO A PAGINAÇÃO GLOBAL
-        self.pagination_class.page_size = 2
+        self.pagination_class.page_size = 50
         # definindo a consulta para a paginação
         avaliacoes = Avaliacao.objects.filter(curso_id=pk)
         # passando o resultado da consulta para o paginador do django
@@ -129,7 +129,6 @@ class CursoViewSet(viewsets.ModelViewSet):
 # class AvaliacoesViewSet(viewsets.ModelViewSet):
 #     queryset = Avaliacao.objects.all()
 #     serializer_class = AvaliacaoSerializer
-
 
 
 class AvaliacoesViewSet(
